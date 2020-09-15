@@ -76,6 +76,7 @@ export default {
 			this.product = data;
 		},
 		pemesanan() {
+			console.log(this.pesan.jumlah_pemesanan);
 			if (this.pesan.jumlah_pemesanan) {
 				this.pesan.products = this.product;
 				axios

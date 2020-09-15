@@ -28,7 +28,6 @@
   </div>
 </template>
 <script>
-
 // @ is an alias to /src
 import Navbar from "@/components/Navbar.vue";
 import Hero from "@/components/Hero.vue";
@@ -60,7 +59,8 @@ export default {
       this.setProducts(response.data);
       console.log(response.data)
     })
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error));   
+
   },
 };
 
