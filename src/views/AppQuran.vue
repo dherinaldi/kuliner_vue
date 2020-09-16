@@ -17,9 +17,9 @@
 			</div>
 
 			<div class="row mb-4">				
-				 <div class="col-md-4 mt-4" v-for="(surah, index) in surahs" :key="index">
-				 	<CardSurah 
-				 	:surah=surah />
+				<div class="col-md-4 mt-4" v-for="(surah, index) in surahs" :key="index">
+					<CardSurah 
+					:surah=surah />
 					
 				</div>
 			</div>
@@ -50,17 +50,21 @@
 		methods:{
 			setSurahs(data) {
 				this.surahs = data;
-			},			
+			},
+			load(){
+				axios
+				.get("http://localhost:3000/quran")
+				.then((response) => {
+					this.setSurahs(response.data);
+					//console.log(response.data);
+				})
+				.catch((error) => console.log(error));
+
+			}			
 
 		},
 		mounted(){			
-			axios
-			.get("http://localhost:3000/quran")
-			.then((response) => {
-				this.setSurahs(response.data);
-				console.log(response.data);
-			})
-			.catch((error) => console.log(error));
+			this.load();			
 		}
 	};
 	
