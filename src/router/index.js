@@ -9,6 +9,10 @@ import SubmenuLain from '../views/SubmenuLain.vue'
 import Crud from '../views/Crud.vue'
 import PesananSukses from '../views/PesananSukses.vue'
 import AppQuran from '../views/AppQuran.vue'
+import Lain from '../views/Lain.vue'
+import Bvpagination from '../components/Bvpagination.vue'
+import AppQuranFathimah from '../views/AppQuranFathimah.vue'
+import QuranFathimahDetail from '../views/QuranFathimahDetail.vue'
 
 Vue.use(Router)
 
@@ -59,6 +63,27 @@ export default new Router({
 		path: '/appquran',
 		name: 'AppQuran',
 		component: AppQuran
+	},	
+	{
+		path: '/lain',
+		name: 'Lain',
+		component: Lain
 	},
+	{
+		path: '/bvpagination',
+		name: 'Bvpagination',
+		component: Bvpagination
+
+	},
+	{
+		path: '/appquranfathimah/',
+		name: '',
+		component: AppQuranFathimah
+	},
+	{
+		path: '/appquranfathimah/:surah',
+		name: 'QuranFathimahDetail',
+		component: QuranFathimahDetail
+	}
 	]
 })

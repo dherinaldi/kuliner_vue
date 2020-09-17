@@ -21,6 +21,9 @@
 						<li class="nav-item">
 							<router-link class="nav-link" to="/appquran">App Quran</router-link>
 						</li>
+						<li class="nav-item">
+							<router-link class="nav-link" to="/lain">Lain</router-link>
+						</li>
 					</b-navbar-nav>
 
 					<b-navbar-nav class="ml-auto">

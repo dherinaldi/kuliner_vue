@@ -10,6 +10,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuex from 'vuex'
 
+/*import Abbreviaton from '@/assets/js/abbreviation-autocomplete.js';
+import '@/assets/css/abbreviation-autocomplete.css';*/
+
 Vue.use(VueToast);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
