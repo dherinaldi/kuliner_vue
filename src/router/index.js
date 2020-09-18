@@ -63,7 +63,7 @@ export default new Router({
 		path: '/appquran',
 		name: 'AppQuran',
 		component: AppQuran
-	},	
+	},
 	{
 		path: '/lain',
 		name: 'Lain',
