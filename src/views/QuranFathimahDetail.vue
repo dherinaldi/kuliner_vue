@@ -2,6 +2,7 @@
 <div>
     <Navbar />
     <div class="container">
+        <NavQuran />
         <div class="row mt-4">
             <div class="col">
                 <h2>
@@ -28,13 +29,13 @@
         </b-row>
         <b-row class="my-2">
             <b-col cols="1">
-                Start
+                Mulai
             </b-col>
             <b-col cols="4">
                 <b-form-input v-model.number="mulai" placeholder="Ketikkan mulai"></b-form-input>
             </b-col>
             <b-col cols="1">
-                End
+                Akhir
             </b-col>
             <b-col cols="4">
                 <b-form-input v-model.number="akhir" placeholder="Ketikkan akhir"></b-form-input>
@@ -50,10 +51,15 @@
 
         <b-row v-else class="my-2">
             <b-col>
-                <b-card :title="ayat.ayat" v-for="(ayat,index) in ayats.ayat.data.ar" :key="index">
-                    <b-card-text align="right" v-html="ayat.teks">
+                <b-card v-for="(ayat,id) in ayat_dat" :key="id">
+                    <b-card-text align="right" v-html="ayat.ar_teks" v-onhover>
+                    </b-card-text>
+                    <b-card-text align="left" v-html="ayat.idt_teks">
+                    </b-card-text>
+                    <b-card-text align="left">{{ayat.ayat}}. {{ayat.id_teks}}
                     </b-card-text>
                 </b-card>
+
             </b-col>
         </b-row>
 
@@ -63,13 +69,15 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import NavQuran from "@/components/NavQuran.vue";
 import axios from 'axios';
 
 //https://api.banghasan.com/quran/format/json/surat/1/ayat/1-5
 export default {
     name: 'QuranFathimahDetail',
     components: {
-        Navbar
+        Navbar,
+        NavQuran
     },
     data() {
         return {
@@ -81,7 +89,8 @@ export default {
             show_ayat: false,
             ayats: [],
             mulai: 1,
-            akhir: 5
+            akhir: 5,
+            ayat_dat: []
         }
     },
     methods: {
@@ -90,9 +99,27 @@ export default {
             this.surah_id = this.$route.params.surah;
         },
         setAyat(data) {
-            this.ayats = data
-            console.log(data);
-            console.log(Object.entries(data));
+            this.ayats = data;
+
+        },
+        setAyatDet(data) {
+            const ayat_ar = data.ar;
+            const ayat_id = data.id;
+            const ayat_idt = data.idt;
+
+            const ar_teks = ayat_ar.map((res, index) => ({
+                //const id_teks = JSON.parse(JSON.stringify(ayat_id[index].teks))
+                id: index,
+                ayat: ayat_id[index].ayat,
+                ar_teks: res.teks,
+                id_teks: ayat_id[index].teks,
+                idt_teks: ayat_idt[index].teks
+
+            }));
+
+            this.ayat_dat = ar_teks;
+            console.log(this.ayat_dat)
+
         },
         load() {
             axios
@@ -109,7 +136,8 @@ export default {
             axios
                 .get('https://api.banghasan.com/quran/format/json/surat/' + surah + '/ayat/' + start + '-' + end + '')
                 .then((response) => {
-                    this.setAyat(response.data)
+                    this.setAyat(response.data);
+                    this.setAyatDet(response.data.ayat.data);
                 })
                 .catch((error) => console.log(error));
 
@@ -124,15 +152,28 @@ export default {
             }
         },
         toggle_ayat(e, surah) {
-            console.log(surah)
             if (this.show_ayat == true) {
                 this.show_ayat = false
+                e.target.innerText = "Lihat Ayat"
             } else {
                 this.show_ayat = true
                 this.load_ayat(surah, this.mulai, this.akhir)
+                e.target.innerText = "Tutup Ayat"
             }
         }
 
+    },
+    directives: {
+        onhover: {
+            bind(el, binding) {
+                el.onmouseover = function () {
+                    el.style.fontSize = "30px";
+                };
+                el.onmouseout = function () {
+                    el.style.fontSize = "15px";
+                };
+            }
+        }
     },
     mounted() {
         this.load();
@@ -140,7 +181,7 @@ export default {
     },
     filters: {
         subStr: function (string) {
-            return string.substring(0, 150) + '...';
+            return string.substr(0, 150) + '...';
         }
 
     }

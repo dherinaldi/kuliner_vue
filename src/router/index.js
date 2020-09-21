@@ -13,6 +13,7 @@ import Lain from '../views/Lain.vue'
 import Bvpagination from '../components/Bvpagination.vue'
 import AppQuranFathimah from '../views/AppQuranFathimah.vue'
 import QuranFathimahDetail from '../views/QuranFathimahDetail.vue'
+import JadwalSholat from '../views/JadwalSholat.vue'
 
 Vue.use(Router)
 
@@ -84,6 +85,11 @@ export default new Router({
 		path: '/appquranfathimah/:surah',
 		name: 'QuranFathimahDetail',
 		component: QuranFathimahDetail
+	},{
+		path: '/jadwalsholat/',
+		name: 'JadwalSholat',
+		component: JadwalSholat
 	}
+
 	]
 })

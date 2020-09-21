@@ -2,22 +2,7 @@
 <div>
     <Navbar />
     <div class="container">
-        <b-row>
-            <b-col cols="3">
-                <router-link to="/appquran">
-                    <b-button variant="outline-primary">
-                        <b-icon icon="book" aria-hidden="true"></b-icon> App Quran 1
-                    </b-button>
-                </router-link>
-            </b-col>
-            <b-col cols="3">
-                <router-link to="#">
-                    <b-button variant="outline-success">
-                        <b-icon icon="book" aria-hidden="true"></b-icon> App Quran Fathimah
-                    </b-button>
-                </router-link>
-            </b-col>
-        </b-row>
+        <NavQuran />
         <div class="row mt-4">
             <div class="col">
                 <h2>
@@ -51,6 +36,7 @@
 <script>
 import Vue from 'vue'
 import Navbar from "@/components/Navbar.vue";
+import NavQuran from "@/components/NavQuran.vue";
 
 import axios from "axios";
 
@@ -59,7 +45,8 @@ const link = "https://api.banghasan.com/quran/format/json/surat";
 export default {
     name: 'AppQuranFathimah',
     components: {
-        Navbar
+        Navbar,
+        NavQuran
     },
     data() {
         return {
