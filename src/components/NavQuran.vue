@@ -21,6 +21,13 @@
             </b-button>
         </router-link>
     </b-col>
+    <b-col cols="3">
+        <router-link to="/appmovie">
+            <b-button variant="outline-info">
+                <b-icon icon="film" aria-hidden="true"></b-icon> Apps Movie
+            </b-button>
+        </router-link>
+    </b-col>
 </b-row>
 </template>
 

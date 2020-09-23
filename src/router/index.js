@@ -14,6 +14,8 @@ import Bvpagination from '../components/Bvpagination.vue'
 import AppQuranFathimah from '../views/AppQuranFathimah.vue'
 import QuranFathimahDetail from '../views/QuranFathimahDetail.vue'
 import JadwalSholat from '../views/JadwalSholat.vue'
+import AppMovie from '@/views/AppMovie.vue'
+import MovieDetail from '@/views/MovieDetail.vue'
 
 Vue.use(Router)
 
@@ -89,7 +91,18 @@ export default new Router({
 		path: '/jadwalsholat/',
 		name: 'JadwalSholat',
 		component: JadwalSholat
+	},
+	{
+		path: '/appmovie',
+		name: 'AppMovie',
+		component: AppMovie
+	},
+	{
+		path: '/appmovie/:id',
+		name: 'MovieDetail',
+		component: MovieDetail
 	}
+
 
 	]
 })

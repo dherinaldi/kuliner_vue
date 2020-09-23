@@ -113,7 +113,7 @@ export default {
             this.show = true
         },
         async load_rate(link, currency) {
-            const res = await axios.get(`${link}?base=${currency}`).then((res) => res)
+            const res = await axios.get(`${link}?base=${currency}`).then((res) => res).then(err => err)
             return res;
 
         },
