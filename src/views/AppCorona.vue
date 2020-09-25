@@ -12,6 +12,25 @@
                 </h2>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col">
+                <div class="input-group mb-3">
+
+                    <input v-model="search" type="text" class="form-control" placeholder="Cari Negara...." aria-label="Cari" aria-describedby="basic-addon1" @keyup="searchCountry" />
+
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            <b-icon-search></b-icon-search>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <b-row>
+            <b-col>
+                <img src="https://www.countryflags.io/id/shiny/64.png">
+            </b-col>
+        </b-row>
         <b-row>
             <b-col cols="3" class="bv-example-row mb-3">
                 Global Konfirm : {{ confirmed_global | toCurrency }}
@@ -28,7 +47,7 @@
         </b-row>
         <b-row>
 
-            <b-col cols="3" class="bv-example-row mb-3" v-for="(global,index) in globals" :key="index">
+            <b-col cols="3" class="bv-example-row mb-3" v-for="(global,index) in filteredList" :key="index">
                 <b-card :title="global.Country_Region">
                     <b-card-text>
                         <h5>Konfirm {{$options.filters.toCurrency(global.Confirmed)}}</h5>
@@ -39,6 +58,9 @@
                         <b-progress :value="(global.Recovered/recovered_global) *100" show-value :precision="2" class="mb-3" variant="success"></b-progress>
                         <h5>Active {{global.Active | toCurrency }} </h5>
                         <b-progress :value="(global.Active/active_global) * 100 " show-value :precision="2" class="mb-3" variant="info"></b-progress>
+                        <h5>Tingkat Kematian {{((global.Deaths / global.Confirmed)*100).toFixed(2)}} % </h5>
+
+                        <h5>Tingkat Kesembuhan {{((global.Recovered / global.Confirmed) * 100).toFixed(2) }} %</h5>
                         Last_Update: {{global.Last_Update | formatDate}}
 
                     </b-card-text>
@@ -74,15 +96,19 @@ export default {
             deaths_global: 0,
             recovered_global: 0,
             active_global: 0,
-            url_source: ''
-
+            url_source: '',
+            search: ''
         }
 
     },
     methods: {
         async load_data_global(url) {
-            const res = await axios.get(`${url}/global`);
+            const res = await axios.get(`${url}global`);
             return res;
+        },
+        async searchCountry() {
+            console.log(this.search)
+
         }
     },
     filters: {
@@ -90,8 +116,17 @@ export default {
             return `${value.toLocaleString()}`
         }
     },
+    computed: {
+        filteredList() {
+            return this.globals.filter(dat => {
+                return dat.Country_Region.toLowerCase().includes(this.search.toLowerCase());
+            })
+
+        }
+
+    },
     async created() {
-        axios.get(`${url}/global`).then(res => {
+        axios.get(`${url}global`).then(res => {
             this.globals = res.data
 
         }).catch(e => console.log(e));
