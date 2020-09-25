@@ -12,6 +12,7 @@
 
                 <div class="mt-4">
                     <h4>{{movies.Title}}</h4>
+
                     <b-card :img-src="movies.Poster" img-alt="Card image" img-left class="mb-3">
                         <b-card-text>
                             Some quick example text to build on the card and make up the bulk of the card's content.<br>
@@ -21,9 +22,14 @@
                             Plot : {{movies.Plot}} <br>
                             Lang : {{movies.Language}} Country: {{movies.Country}}<br>
                             Awards : {{movies.Awards}}<br>
-                            Ratings :{{movies.Ratings[0].Value}} ({{movies.Ratings[0].Source}}) <br>
+                            Ratings :
+                            <div v-for="(rate,index) in movies.Ratings" :key="index">
+                                {{rate.Value}} ({{rate.Source}})
+                            </div>
+
                             Type : {{movies.Type}} <br>
-                            Total Seasons : {{movies.totalSeasons}}
+                            Total Seasons : {{movies.totalSeasons}} <br>
+                            Production : {{ movies.Production}}
 
                         </b-card-text>
 

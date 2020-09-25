@@ -17,6 +17,8 @@ import JadwalSholat from '../views/JadwalSholat.vue'
 import AppMovie from '@/views/AppMovie.vue'
 import MovieDetail from '@/views/MovieDetail.vue'
 
+import AppCorona from '@/views/AppCorona.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -101,7 +103,13 @@ export default new Router({
 		path: '/appmovie/:id',
 		name: 'MovieDetail',
 		component: MovieDetail
-	}
+	},
+	{
+		path: '/appcorona',
+		name: 'AppCorona',
+		component: AppCorona
+	},
+
 
 
 	]

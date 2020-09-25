@@ -10,14 +10,22 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuex from 'vuex'
 
+import moment from 'moment';
+
 /*import Abbreviaton from '@/assets/js/abbreviation-autocomplete.js';
 import '@/assets/css/abbreviation-autocomplete.css';*/
+
+
+Vue.filter('formatDate', function (value) {
+    if (value) {
+        return moment(value).format('MM/DD/YYYY hh:mm')
+    }
+})
 
 Vue.use(VueToast);
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(Vuex);
-
 
 Vue.config.productionTip = false
 
@@ -29,7 +37,7 @@ const store = new Vuex.Store({
   	increment: state => state.count++,
   	add_increment (state, payload){
   		state.count += payload;
-  	}, 
+  	},
     decrement: state => state.count--,
     min_decrement : (state, payload) => {
     	state.count -= payload;
