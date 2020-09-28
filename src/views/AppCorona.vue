@@ -121,9 +121,7 @@ export default {
             return this.globals.filter(dat => {
                 return dat.Country_Region.toLowerCase().includes(this.search.toLowerCase());
             })
-
         }
-
     },
     async created() {
         axios.get(`${url}global`).then(res => {
