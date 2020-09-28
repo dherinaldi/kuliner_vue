@@ -28,7 +28,14 @@
         </div>
         <b-row>
             <b-col>
-                <img src="https://www.countryflags.io/id/shiny/64.png">
+                <b-link @click="show_data">                        
+                    <img src="https://www.countryflags.io/id/shiny/64.png">
+                </b-link>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col>
+                <b-table striped hover :items="provs"></b-table>
             </b-col>
         </b-row>
         <b-row>
@@ -97,17 +104,27 @@ export default {
             recovered_global: 0,
             active_global: 0,
             url_source: '',
-            search: ''
+            search: '',
+            provs:[]
         }
 
     },
     methods: {
+        show_data(){
+            axios.get(`${url}indonesia/provinsi/`).then(res=>{
+                this.provs = res.data
+                console.log(res.data);
+
+            }).catch(e=>console.log(e))
+            
+
+        },
         async load_data_global(url) {
             const res = await axios.get(`${url}global`);
             return res;
         },
         async searchCountry() {
-            console.log(this.search)
+            console.log(this.search)          
 
         }
     },
