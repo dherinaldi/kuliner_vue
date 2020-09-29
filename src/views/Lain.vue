@@ -74,6 +74,7 @@ export default {
 
         },
         login() {
+            tr
             this.load_data()
 
         },
