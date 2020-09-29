@@ -28,7 +28,7 @@
         </div>
         <b-row>
             <b-col>
-                <b-link @click="show_data">                        
+                <b-link @click="show_data">
                     <img src="https://www.countryflags.io/id/shiny/64.png">
                 </b-link>
             </b-col>
@@ -105,18 +105,17 @@ export default {
             active_global: 0,
             url_source: '',
             search: '',
-            provs:[]
+            provs: []
         }
 
     },
     methods: {
-        show_data(){
-            axios.get(`${url}indonesia/provinsi/`).then(res=>{
+        show_data() {
+            axios.get(`${url}indonesia/provinsi/`).then(res => {
                 this.provs = res.data
                 console.log(res.data);
 
-            }).catch(e=>console.log(e))
-            
+            }).catch(e => console.log(e))
 
         },
         async load_data_global(url) {
@@ -124,7 +123,7 @@ export default {
             return res;
         },
         async searchCountry() {
-            console.log(this.search)          
+            console.log(this.search)
 
         }
     },
